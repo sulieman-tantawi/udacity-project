@@ -92,8 +92,9 @@ def trip_duration_stats(df):
     start_time = time.time()
 
     total_travel_time = df['Trip Duration'].sum()
-    print(f"Total Travel Time: {total_travel_time} seconds (approx. {round(total_travel_time/3600, 2)} hours)")
-
+    hours, remainder = divmod(total_travel_time, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    print(f"Total Travel Time: {int(hours)} hours, {int(minutes)} minutes, and {round(seconds, 2)} seconds")
     mean_travel_time = df['Trip Duration'].mean()
     print(f"Average Travel Time: {round(mean_travel_time, 2)} seconds")
 
