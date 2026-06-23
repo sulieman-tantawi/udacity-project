@@ -16,10 +16,10 @@ def get_filters():
         else:
             print("Invalid input. Please make sure to enter either Chicago, New York City, or Washington.")
 
-    months = ['january', 'february', 'march', 'april', 'may', 'june', 'all']
+    VALID_MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'all']
     while True:
         month = input("Which month? January, February, March, April, May, June, or type 'all' for no filter:\n").strip().lower()
-        if month in months:
+        if month in VALID_MONTHS:
             break
         else:
             print("Invalid input. Please enter a valid month from the list or 'all'.")
@@ -82,8 +82,7 @@ def station_stats(df):
     popular_end_station = df['End Station'].mode()[0]
     print(f"Most Commonly Used End Station: {popular_end_station}")
 
-    df['Trip Route'] = df['Start Station'] + " -> " + df['End Station']
-    popular_route = df['Trip Route'].mode()[0]
+    df['Trip Route'] = df['Start Station'].str.cat(df['End Station'], sep=' -> ')    popular_route = df['Trip Route'].mode()[0]
     print(f"Most Frequent Trip Route: {popular_route}")
 
     print(f"\nThis took {time.time() - start_time} seconds.")
@@ -94,8 +93,9 @@ def trip_duration_stats(df):
     start_time = time.time()
 
     total_travel_time = df['Trip Duration'].sum()
-    print(f"Total Travel Time: {total_travel_time} seconds (approx. {round(total_travel_time/3600, 2)} hours)")
-
+    hours, remainder = divmod(total_travel_time, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    print(f"Total Travel Time: {int(hours)} hours, {int(minutes)} minutes, and {round(seconds, 2)} seconds")
     mean_travel_time = df['Trip Duration'].mean()
     print(f"Average Travel Time: {round(mean_travel_time, 2)} seconds")
 
