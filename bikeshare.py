@@ -81,8 +81,7 @@ def station_stats(df):
     popular_end_station = df['End Station'].mode()[0]
     print(f"Most Commonly Used End Station: {popular_end_station}")
 
-    df['Trip Route'] = df['Start Station'] + " -> " + df['End Station']
-    popular_route = df['Trip Route'].mode()[0]
+    df['Trip Route'] = df['Start Station'].str.cat(df['End Station'], sep=' -> ')    popular_route = df['Trip Route'].mode()[0]
     print(f"Most Frequent Trip Route: {popular_route}")
 
     print(f"\nThis took {time.time() - start_time} seconds.")
