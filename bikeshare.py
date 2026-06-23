@@ -15,10 +15,10 @@ def get_filters():
         else:
             print("Invalid input. Please make sure to enter either Chicago, New York City, or Washington.")
 
-    months = ['january', 'february', 'march', 'april', 'may', 'june', 'all']
+    VALID_MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'all']
     while True:
         month = input("Which month? January, February, March, April, May, June, or type 'all' for no filter:\n").strip().lower()
-        if month in months:
+        if month in VALID_MONTHS:
             break
         else:
             print("Invalid input. Please enter a valid month from the list or 'all'.")
