@@ -6,6 +6,7 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'washington': 'washington.csv' }
 
 def get_filters():
+    # This script explores bikeshare data
     print('Hello! Let\'s explore some US bikeshare data!')
     
     while True:
